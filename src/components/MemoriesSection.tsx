@@ -41,7 +41,7 @@ export default function MemoriesSection({
           <SectionHeading
             eyebrow="Khoảnh khắc"
             title="Một album nhỏ cho những ngày tháng rất đẹp"
-            description="Gallery Phase 4 vẫn giữ filter, modal và bố cục polaroid, nhưng được nối thêm random memory và love reaction để mỗi lần ghé vào đều có gì đó mới."
+            description="Gallery vẫn giữ filter, modal và bố cục polaroid, đồng thời có thêm random memory và love reaction để mỗi lần ghé vào đều có gì đó mới."
           />
 
           <div className="flex flex-wrap gap-2">

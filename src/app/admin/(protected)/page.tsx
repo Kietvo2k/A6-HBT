@@ -21,7 +21,7 @@ export default async function AdminOverviewPage() {
       <AdminPageHeader
         eyebrow="Overview"
         title="Một nơi để quản lý toàn bộ ký ức của lớp"
-        description="Dashboard Phase 3 ưu tiên rõ ràng và dễ dùng: bạn có thể kiểm soát nội dung public, các mục cần moderation và những tính năng tương tác của lớp chỉ từ một nơi."
+        description="Dashboard ưu tiên rõ ràng và dễ dùng: bạn có thể kiểm soát nội dung public, các mục cần moderation và những tính năng tương tác của lớp chỉ từ một nơi."
       />
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
@@ -30,7 +30,11 @@ export default async function AdminOverviewPage() {
           const value = stats[card.key];
 
           return (
-            <Link key={card.href} href={card.href} className="paper-card rounded-[2rem] p-5 transition hover:-translate-y-1">
+            <Link
+              key={card.href}
+              href={card.href}
+              className="paper-card rounded-[2rem] p-5 transition hover:-translate-y-1"
+            >
               <div className="flex items-center justify-between gap-4">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.22em] text-muted">

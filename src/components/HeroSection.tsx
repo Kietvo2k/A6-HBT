@@ -41,7 +41,7 @@ export default function HeroSection({
               transition={{ duration: 0.55 }}
             >
               <Sparkles className="h-4 w-4 text-[#8b76ac]" />
-              Ky yeu dien tu • {siteConfig.year}
+              Kỷ yếu điện tử • {siteConfig.year}
             </motion.div>
 
             <motion.div
@@ -132,9 +132,9 @@ export default function HeroSection({
                     </p>
                     <div className="soft-divider my-5" />
                     <p className="text-sm leading-7 text-muted">
-                      Bộ khung Phase 1 đã sẵn sàng cho việc thay dữ liệu thật,
-                      thêm ảnh thật và nâng cấp lên backend ở giai đoạn tiếp
-                      theo.
+                      Website đã sẵn sàng cho việc thay dữ liệu thật, thêm ảnh
+                      thật và tiếp tục mở rộng khi lớp mình muốn lưu thêm nhiều
+                      kỷ niệm hơn nữa.
                     </p>
                   </div>
                 </div>

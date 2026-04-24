@@ -89,7 +89,7 @@ export default function MusicPlayer({ config }: MusicPlayerProps) {
           <SectionHeading
             eyebrow="Nhạc"
             title="Một nút nhỏ để bật lại cảm xúc"
-            description="Phase 1 không auto-play để tránh lỗi trình duyệt. Người dùng chủ động bấm mới phát, và nếu chưa có file audio thì giao diện sẽ hiện fallback rõ ràng."
+            description="Nhạc nền không auto-play để tránh lỗi trình duyệt. Người dùng chủ động bấm mới phát, và nếu chưa có file audio thì giao diện sẽ hiện fallback rõ ràng."
           />
 
           <div className="paper-card rounded-[2rem] p-5 sm:p-6">

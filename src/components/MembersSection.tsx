@@ -26,7 +26,7 @@ export default function MembersSection({
         <SectionHeading
           eyebrow="Thành viên"
           title="Những gương mặt làm nên màu sắc của lớp"
-          description="Phase 4 giữ nguyên tinh thần yearbook card nhưng nâng nút thả tim thành love reaction lưu database, có count thật và giới hạn spam theo browser."
+          description="Yearbook card vẫn giữ tinh thần mềm mại ban đầu, nhưng nút thả tim giờ đã lưu database, có count thật và giới hạn spam theo browser."
         />
 
         <DataStateNotice message={dataState.message} />

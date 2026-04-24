@@ -14,7 +14,7 @@ export default async function AdminVotesPage() {
       <AdminPageHeader
         eyebrow="Votes"
         title="Quản lý category bình chọn và xem kết quả"
-        description="Phase 4 chỉ dùng các category vui, tích cực và an toàn. Mỗi browser được giới hạn một vote cho mỗi category bằng `voter_key`."
+        description="Chỉ dùng các category vui, tích cực và an toàn. Mỗi browser được giới hạn một vote cho mỗi category bằng `voter_key`."
       />
 
       <AdminSectionCard title="Tạo vote category mới">

@@ -99,7 +99,7 @@ export const siteConfig: SiteConfig = {
     trackTitle: "Bản nhạc sân trường",
     audioSrc: "",
     helperText:
-      "Chưa có file nhạc. Bạn có thể thêm file vào public/audio/class-theme.mp3 trong Phase 2, giao diện đã sẵn sàng để kết nối.",
+      "Chưa có file nhạc. Bạn có thể thêm file vào public/audio/class-theme.mp3, giao diện đã sẵn sàng để kết nối.",
   },
 };
 

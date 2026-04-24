@@ -29,7 +29,7 @@ type FormState = {
 
 type FormErrors = Partial<Record<keyof FormState, string>>;
 
-const GUESTBOOK_STORAGE_KEY = "yearbook-phase2-guestbook-local-fallback";
+const GUESTBOOK_STORAGE_KEY = "yearbook-guestbook-local-fallback";
 
 export default function GuestbookSection({
   initialMessages,
@@ -133,7 +133,7 @@ export default function GuestbookSection({
         setForm({ name: "", message: "" });
         setErrors({});
         setStatusMessage(
-          "Lời nhắn đã được gửi vào database và đang chờ duyệt. Khi `is_approved = true`, nó sẽ xuất hiện công khai trong sổ lưu bút.",
+          "Lời nhắn đã được gửi vào database và đang chờ duyệt. Khi được approve, nó sẽ xuất hiện công khai trong sổ lưu bút.",
         );
         return;
       }
@@ -172,7 +172,7 @@ export default function GuestbookSection({
           <SectionHeading
             eyebrow="Lưu bút"
             title="Một góc để nhắn vài điều thật lòng"
-            description="Phase 2 đã chuyển luồng gửi lưu bút sang database. Tin nhắn mới mặc định `is_approved = false`, sẵn sàng cho bước admin duyệt ở giai đoạn sau."
+            description="Lưu bút hiện gửi vào database. Tin nhắn mới mặc định ở trạng thái chờ duyệt trước khi hiển thị công khai."
           />
 
           <DataStateNotice message={dataState.message} />
@@ -293,7 +293,7 @@ export default function GuestbookSection({
                   </p>
                   <p className="mt-2 text-sm leading-7 text-muted">
                     {submissionMode === "database"
-                      ? "Hãy gửi lời nhắn đầu tiên. Sau khi admin duyệt ở Phase 3, nội dung sẽ xuất hiện ở đây."
+                      ? "Hãy gửi lời nhắn đầu tiên. Sau khi admin duyệt, nội dung sẽ xuất hiện ở đây."
                       : "Hãy là người đầu tiên viết vài dòng cho tập thể lớp trong cuốn kỷ yếu này."}
                   </p>
                 </div>

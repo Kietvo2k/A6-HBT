@@ -25,7 +25,7 @@ export default function TimelineSection({
         <SectionHeading
           eyebrow="Dòng thời gian"
           title="Những cột mốc làm thanh xuân có hình dáng riêng"
-          description="Timeline dọc vẫn được giữ nguyên về giao diện, nhưng Phase 2 đã sẵn sàng đọc các cột mốc kỷ niệm từ Supabase."
+          description="Timeline dọc vẫn giữ giao diện mềm mại quen thuộc và hiện đã sẵn sàng đọc các cột mốc kỷ niệm từ Supabase."
         />
 
         <DataStateNotice message={dataState.message} />

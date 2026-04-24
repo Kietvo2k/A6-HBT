@@ -33,24 +33,24 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
               Supabase setup
             </p>
             <h1 className="mt-4 max-w-2xl text-4xl leading-tight sm:text-5xl">
-              Khu vá»±c admin cáº§n Supabase env Ä‘á»ƒ báº­t auth vÃ  dashboard
+              Khu vực admin cần Supabase env để bật auth và dashboard
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-8 text-muted sm:text-lg">
-              Hiá»‡n táº¡i project chÆ°a cÃ³ Ä‘á»§ `NEXT_PUBLIC_SUPABASE_URL` vÃ 
-              `NEXT_PUBLIC_SUPABASE_ANON_KEY`, nÃªn mÃ¬nh giá»¯ public website cháº¡y
-              Ä‘Æ°á»£c vÃ  chÆ°a cho admin flow khá»Ÿi táº¡o.
+              Hiện tại project chưa có đủ `NEXT_PUBLIC_SUPABASE_URL` và
+              `NEXT_PUBLIC_SUPABASE_ANON_KEY`, nên website public vẫn chạy được
+              còn khu vực quản trị sẽ chờ bạn cấu hình xong.
             </p>
           </section>
 
           <section className="paper-card rounded-[2rem] p-6 sm:p-7">
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted">
-              Cáº§n cáº¥u hÃ¬nh
+              Cần cấu hình
             </p>
             <div className="mt-5 space-y-4 text-sm leading-7 text-muted">
-              <p>1. Táº¡o file `.env.local` trong workspace.</p>
-              <p>2. ThÃªm `NEXT_PUBLIC_SUPABASE_URL`.</p>
-              <p>3. ThÃªm `NEXT_PUBLIC_SUPABASE_ANON_KEY`.</p>
-              <p>4. Restart `npm run dev` hoáº·c cháº¡y láº¡i build.</p>
+              <p>1. Tạo file `.env.local` trong workspace.</p>
+              <p>2. Thêm `NEXT_PUBLIC_SUPABASE_URL`.</p>
+              <p>3. Thêm `NEXT_PUBLIC_SUPABASE_ANON_KEY`.</p>
+              <p>4. Restart `npm run dev` hoặc chạy lại build.</p>
             </div>
           </section>
         </div>
@@ -69,8 +69,8 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
             Đăng nhập để tiếp tục viết và gìn giữ cuốn kỷ yếu của lớp
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-8 text-muted sm:text-lg">
-            Phase 3 dùng Supabase Auth để bảo vệ dashboard. Người chưa đăng nhập
-            sẽ được chuyển về đây, còn người không có role admin sẽ bị chặn khỏi
+            Supabase Auth được dùng để bảo vệ dashboard. Người chưa đăng nhập sẽ
+            được chuyển về đây, còn người không có role admin sẽ bị chặn khỏi
             khu vực quản trị.
           </p>
         </section>

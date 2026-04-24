@@ -14,12 +14,17 @@ export default async function AdminQuizPage() {
       <AdminPageHeader
         eyebrow="Quiz"
         title="Quản lý quiz mở khóa"
-        description="Phase 3 cho phép giữ nhiều quiz trong database, nhưng public side chỉ dùng quiz có `is_active = true`. Nếu chưa có quiz active, hệ thống sẽ fallback về `quizConfig` local."
+        description="Bạn có thể giữ nhiều quiz trong database, nhưng public side chỉ dùng quiz có `is_active = true`. Nếu chưa có quiz active, hệ thống sẽ fallback về `quizConfig` local."
       />
 
       <AdminSectionCard title="Tạo quiz mới">
         <form action={upsertQuizAction} className="grid gap-4 md:grid-cols-2">
-          <input name="question" required placeholder="Câu hỏi mở khóa" className="rounded-[1.1rem] border border-line bg-white/80 px-4 py-3 md:col-span-2" />
+          <input
+            name="question"
+            required
+            placeholder="Câu hỏi mở khóa"
+            className="rounded-[1.1rem] border border-line bg-white/80 px-4 py-3 md:col-span-2"
+          />
           <input name="option_a" required placeholder="Đáp án A" className="rounded-[1.1rem] border border-line bg-white/80 px-4 py-3" />
           <input name="option_b" required placeholder="Đáp án B" className="rounded-[1.1rem] border border-line bg-white/80 px-4 py-3" />
           <input name="option_c" placeholder="Đáp án C" className="rounded-[1.1rem] border border-line bg-white/80 px-4 py-3" />
