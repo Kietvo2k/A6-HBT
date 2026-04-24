@@ -7,13 +7,15 @@ type SubmitButtonProps = {
   pendingLabel?: string;
   variant?: "primary" | "secondary" | "danger";
   className?: string;
+  confirmMessage?: string;
 };
 
 export default function SubmitButton({
   children,
-  pendingLabel = "Đang lưu...",
+  pendingLabel = "Saving...",
   variant = "primary",
   className = "",
+  confirmMessage,
 }: SubmitButtonProps) {
   const { pending } = useFormStatus();
 
@@ -28,6 +30,11 @@ export default function SubmitButton({
     <button
       type="submit"
       disabled={pending}
+      onClick={(event) => {
+        if (confirmMessage && !window.confirm(confirmMessage)) {
+          event.preventDefault();
+        }
+      }}
       className={`inline-flex items-center justify-center rounded-full px-4 py-2.5 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-70 ${variantClassName} ${className}`}
     >
       {pending ? pendingLabel : children}
