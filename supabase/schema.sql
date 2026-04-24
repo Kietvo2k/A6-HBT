@@ -10,50 +10,6 @@ begin
 end;
 $$;
 
-create or replace function public.handle_new_user()
-returns trigger
-language plpgsql
-security definer
-set search_path = public
-as $$
-begin
-  insert into public.profiles (id, display_name, email, role)
-  values (
-    new.id,
-    nullif(new.raw_user_meta_data ->> 'display_name', ''),
-    new.email,
-    'guest'
-  )
-  on conflict (id) do update
-  set email = excluded.email;
-
-  return new;
-end;
-$$;
-
-create or replace function public.current_user_role()
-returns text
-language sql
-stable
-security definer
-set search_path = public
-as $$
-  select coalesce(
-    (select role from public.profiles where id = auth.uid()),
-    'guest'
-  );
-$$;
-
-create or replace function public.is_admin()
-returns boolean
-language sql
-stable
-security definer
-set search_path = public
-as $$
-  select public.current_user_role() = 'admin';
-$$;
-
 create or replace function public.sync_guestbook_status()
 returns trigger
 language plpgsql
@@ -72,80 +28,6 @@ begin
 
   return new;
 end;
-$$;
-
-create or replace function public.get_vote_results()
-returns table (
-  category_id uuid,
-  target_member_id uuid,
-  vote_count bigint
-)
-language sql
-stable
-security definer
-set search_path = public
-as $$
-  select
-    votes.category_id,
-    votes.target_member_id,
-    count(*)::bigint as vote_count
-  from public.votes
-  inner join public.vote_categories
-    on public.vote_categories.id = votes.category_id
-  where public.vote_categories.is_visible = true
-  group by votes.category_id, votes.target_member_id;
-$$;
-
-create or replace function public.get_reaction_counts()
-returns table (
-  target_type text,
-  target_id text,
-  reaction_count bigint
-)
-language sql
-stable
-security definer
-set search_path = public
-as $$
-  select
-    reactions.target_type,
-    reactions.target_id,
-    count(*)::bigint as reaction_count
-  from public.reactions
-  group by reactions.target_type, reactions.target_id;
-$$;
-
-create or replace function public.get_public_time_capsules()
-returns table (
-  id uuid,
-  sender_name text,
-  unlock_date date,
-  status text,
-  message text,
-  inserted_at timestamptz
-)
-language sql
-stable
-security definer
-set search_path = public
-as $$
-  select
-    time_capsules.id,
-    time_capsules.sender_name,
-    time_capsules.unlock_date,
-    case
-      when time_capsules.status = 'hidden' then 'hidden'
-      when time_capsules.status = 'opened' or time_capsules.unlock_date <= current_date then 'opened'
-      else 'locked'
-    end as status,
-    case
-      when time_capsules.status = 'opened' or time_capsules.unlock_date <= current_date then time_capsules.message
-      else null
-    end as message,
-    time_capsules.inserted_at
-  from public.time_capsules
-  where time_capsules.status <> 'hidden'
-  order by time_capsules.unlock_date asc, time_capsules.inserted_at desc;
 $$;
 
 create table if not exists public.profiles (
@@ -291,6 +173,124 @@ alter table if exists public.guestbook_messages add column if not exists is_appr
 alter table if exists public.guestbook_messages add column if not exists approved_at timestamptz;
 alter table if exists public.quiz_questions add column if not exists inserted_at timestamptz not null default timezone('utc', now());
 alter table if exists public.quiz_questions add column if not exists updated_at timestamptz not null default timezone('utc', now());
+
+create or replace function public.handle_new_user()
+returns trigger
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  insert into public.profiles (id, display_name, email, role)
+  values (
+    new.id,
+    nullif(new.raw_user_meta_data ->> 'display_name', ''),
+    new.email,
+    'guest'
+  )
+  on conflict (id) do update
+  set email = excluded.email;
+
+  return new;
+end;
+$$;
+
+create or replace function public.current_user_role()
+returns text
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select coalesce(
+    (select role from public.profiles where id = auth.uid()),
+    'guest'
+  );
+$$;
+
+create or replace function public.is_admin()
+returns boolean
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select public.current_user_role() = 'admin';
+$$;
+
+create or replace function public.get_vote_results()
+returns table (
+  category_id uuid,
+  target_member_id uuid,
+  vote_count bigint
+)
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select
+    votes.category_id,
+    votes.target_member_id,
+    count(*)::bigint as vote_count
+  from public.votes
+  inner join public.vote_categories
+    on public.vote_categories.id = votes.category_id
+  where public.vote_categories.is_visible = true
+  group by votes.category_id, votes.target_member_id;
+$$;
+
+create or replace function public.get_reaction_counts()
+returns table (
+  target_type text,
+  target_id text,
+  reaction_count bigint
+)
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select
+    reactions.target_type,
+    reactions.target_id,
+    count(*)::bigint as reaction_count
+  from public.reactions
+  group by reactions.target_type, reactions.target_id;
+$$;
+
+create or replace function public.get_public_time_capsules()
+returns table (
+  id uuid,
+  sender_name text,
+  unlock_date date,
+  status text,
+  message text,
+  inserted_at timestamptz
+)
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select
+    time_capsules.id,
+    time_capsules.sender_name,
+    time_capsules.unlock_date,
+    case
+      when time_capsules.status = 'hidden' then 'hidden'
+      when time_capsules.status = 'opened' or time_capsules.unlock_date <= current_date then 'opened'
+      else 'locked'
+    end as status,
+    case
+      when time_capsules.status = 'opened' or time_capsules.unlock_date <= current_date then time_capsules.message
+      else null
+    end as message,
+    time_capsules.inserted_at
+  from public.time_capsules
+  where time_capsules.status <> 'hidden'
+  order by time_capsules.unlock_date asc, time_capsules.inserted_at desc;
+$$;
 
 do $$
 begin
